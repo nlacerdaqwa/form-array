@@ -1,0 +1,27 @@
+<form [formGroup]="form">
+    <!-- Wrapper de formArray-->
+    <div formArrayName="tags">
+        <div>
+            <button (click)="addTag()">
+                Adicionar Tag
+            </button>
+        </div>
+        <!-- Cada formControl dentro do formArray tem como nome um index (0,1,2,3...)-->
+        <div *ngIf="tags instanceof FormArray && tags.controls.length > 0">
+            <div *ngFor="let tag of tags.controls; let i = index">
+                <div>
+                    <input type="text" placeholder="Tag" [formControlName]="i">
+                    <button (click)="removeTag(i)">X</button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button (click)="addRepo()">Submit</button>
+        </div>
+    </div>
+    <div>
+        <textarea [readonly]=true rows="10" cols="33">
+            {{formJson }}
+        </textarea>
+    </div>
+</form>
